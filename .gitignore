@@ -17,3 +17,7 @@ local.properties
 # Ignore module-level build directories (e.g., app/build)
 build/
 /app/build/
+
+# Ignore IDE and tool caches
+.idea/
+.kotlin/
