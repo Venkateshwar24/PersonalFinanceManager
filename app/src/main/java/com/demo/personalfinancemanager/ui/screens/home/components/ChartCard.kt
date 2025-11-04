@@ -1,8 +1,8 @@
 package com.demo.personalfinancemanager.ui.screens.home.components
 
-import android.graphics.Color as AndroidColor
 import android.content.Context
 import android.widget.TextView
+import android.graphics.Color as AndroidColor
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,6 +32,10 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.utils.MPPointF
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import com.demo.personalfinancemanager.ui.theme.ChartBackground
+import com.demo.personalfinancemanager.ui.theme.TextOnDarkSecondary
 import kotlin.math.max
 import kotlin.math.min
 import java.text.NumberFormat
@@ -55,17 +59,17 @@ fun ChartCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-            .height(280.dp),
-        shape = RoundedCornerShape(16.dp),
+            .padding(horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.inset_horizontal))
+            .height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.height_chart_card)),
+        shape = RoundedCornerShape(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.corner_lg)),
         colors = CardDefaults.cardColors(
-            containerColor = androidx.compose.ui.graphics.Color(0xFF1A1A1A)
+            containerColor = ChartBackground
         )
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_lg)),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             // Chart visualization
@@ -84,12 +88,12 @@ fun ChartCard(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                PeriodButton("1D", selectedPeriod == ChartPeriod.ONE_DAY) { onPeriodSelected(ChartPeriod.ONE_DAY) }
-                PeriodButton("5D", selectedPeriod == ChartPeriod.FIVE_DAYS) { onPeriodSelected(ChartPeriod.FIVE_DAYS) }
-                PeriodButton("1M", selectedPeriod == ChartPeriod.ONE_MONTH) { onPeriodSelected(ChartPeriod.ONE_MONTH) }
-                PeriodButton("3M", selectedPeriod == ChartPeriod.THREE_MONTHS) { onPeriodSelected(ChartPeriod.THREE_MONTHS) }
-                PeriodButton("6M", selectedPeriod == ChartPeriod.SIX_MONTHS) { onPeriodSelected(ChartPeriod.SIX_MONTHS) }
-                PeriodButton("1Y", selectedPeriod == ChartPeriod.ONE_YEAR) { onPeriodSelected(ChartPeriod.ONE_YEAR) }
+                PeriodButton(stringResource(id = com.demo.personalfinancemanager.R.string.period_1d), selectedPeriod == ChartPeriod.ONE_DAY) { onPeriodSelected(ChartPeriod.ONE_DAY) }
+                PeriodButton(stringResource(id = com.demo.personalfinancemanager.R.string.period_5d), selectedPeriod == ChartPeriod.FIVE_DAYS) { onPeriodSelected(ChartPeriod.FIVE_DAYS) }
+                PeriodButton(stringResource(id = com.demo.personalfinancemanager.R.string.period_1m), selectedPeriod == ChartPeriod.ONE_MONTH) { onPeriodSelected(ChartPeriod.ONE_MONTH) }
+                PeriodButton(stringResource(id = com.demo.personalfinancemanager.R.string.period_3m), selectedPeriod == ChartPeriod.THREE_MONTHS) { onPeriodSelected(ChartPeriod.THREE_MONTHS) }
+                PeriodButton(stringResource(id = com.demo.personalfinancemanager.R.string.period_6m), selectedPeriod == ChartPeriod.SIX_MONTHS) { onPeriodSelected(ChartPeriod.SIX_MONTHS) }
+                PeriodButton(stringResource(id = com.demo.personalfinancemanager.R.string.period_1y), selectedPeriod == ChartPeriod.ONE_YEAR) { onPeriodSelected(ChartPeriod.ONE_YEAR) }
             }
         }
     }
@@ -116,7 +120,7 @@ private fun BalanceLineChart(balanceHistory: List<BalanceDataPoint>) {
                 setScaleEnabled(false)
                 setPinchZoom(false)
                 setDrawBorders(false)
-                setNoDataText("")
+                setNoDataText(context.getString(com.demo.personalfinancemanager.R.string.empty))
                 extraBottomOffset = 8f
                 extraTopOffset = 8f
                 
@@ -133,7 +137,7 @@ private fun BalanceLineChart(balanceHistory: List<BalanceDataPoint>) {
                     setDrawGridLines(false)
                     setDrawAxisLine(false)
                     setDrawLabels(true)
-                    textColor = AndroidColor.parseColor("#B0B0B0")
+                    textColor = TextOnDarkSecondary.toArgb()
                     textSize = 10f
                     setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
                 }
@@ -185,7 +189,7 @@ private fun BalanceLineChart(balanceHistory: List<BalanceDataPoint>) {
             chart.axisLeft.valueFormatter = currencyFormatter
 
             // Create dataset
-            val dataSet = LineDataSet(entries, "Balance").apply {
+            val dataSet = LineDataSet(entries, chart.context.getString(com.demo.personalfinancemanager.R.string.balance_label)).apply {
                 color = chartLineColor
                 lineWidth = 2.5f
                 setDrawCircles(false)
@@ -239,9 +243,9 @@ private fun PeriodButton(
     Text(
         text = label,
         modifier = Modifier
-            .clip(RoundedCornerShape(6.dp))
+            .clip(RoundedCornerShape(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.corner_sm)))
             .background(
-                if (isSelected) androidx.compose.ui.graphics.Color(0xFF2C2C2C)
+                if (isSelected) com.demo.personalfinancemanager.ui.theme.PrimaryLight
                 else androidx.compose.ui.graphics.Color.Transparent
             )
             .clickable(
@@ -249,9 +253,12 @@ private fun PeriodButton(
                 indication = LocalIndication.current,
                 onClick = onClick
             )
-            .padding(horizontal = 10.dp, vertical = 6.dp),
+            .padding(
+                horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_md),
+                vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm) / 1.3333f
+            ),
         style = MaterialTheme.typography.labelSmall,
         color = if (isSelected) androidx.compose.ui.graphics.Color.White
-        else androidx.compose.ui.graphics.Color(0xFF808080)
+        else com.demo.personalfinancemanager.ui.theme.IconSecondary
     )
 }

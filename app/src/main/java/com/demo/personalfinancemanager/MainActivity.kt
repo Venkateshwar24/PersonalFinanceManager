@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.demo.personalfinancemanager.ui.theme.PersonalFinanceManagerTheme
 import androidx.compose.material3.Surface
-import com.demo.personalfinancemanager.ui.MainScreen
+import com.demo.personalfinancemanager.ui.PersonalFinanceManagerScreen
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PersonalFinanceManagerTheme {
                 Surface {
-                    MainScreen(viewModelFactory)
+                    PersonalFinanceManagerScreen(viewModelFactory)
                 }
             }
         }

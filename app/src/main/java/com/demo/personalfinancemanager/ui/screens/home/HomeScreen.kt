@@ -12,6 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -39,11 +41,19 @@ fun HomeScreen(
                 }
                 is HomeEffect.NavigateToTransaction -> {
                     // TODO: Integrate with NavController when available
-                    Toast.makeText(context, "Open transaction ${effect.transactionId}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(com.demo.personalfinancemanager.R.string.open_transaction, effect.transactionId),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 is HomeEffect.NavigateToRecipient -> {
                     // TODO: Integrate with NavController when available
-                    Toast.makeText(context, "Open recipient ${effect.recipientId}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(com.demo.personalfinancemanager.R.string.open_recipient, effect.recipientId),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 is HomeEffect.ShowError -> {
                     Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
@@ -101,20 +111,20 @@ private fun ErrorScreen(message: String, onRetry: () -> Unit) {
                 text = "⚠️",
                 style = MaterialTheme.typography.displayMedium
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_lg)))
             Text(
-                text = "Oops! Something went wrong",
+                text = stringResource(id = com.demo.personalfinancemanager.R.string.error_oops),
                 style = MaterialTheme.typography.titleLarge
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)))
             Text(
                 text = message,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_2xl)))
             Button(onClick = onRetry) {
-                Text("Retry")
+                Text(stringResource(id = com.demo.personalfinancemanager.R.string.retry))
             }
         }
     }
@@ -130,7 +140,7 @@ private fun HomeContent(
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = 80.dp)
+        contentPadding = PaddingValues(bottom = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.bottom_list_padding))
     ) {
         item {
             HomeHeader(
@@ -138,19 +148,19 @@ private fun HomeContent(
                 onNotificationClick = { onEvent(HomeEvent.NotificationClicked) }
             )
         }
-        item { Spacer(modifier = Modifier.height(8.dp)) }
+        item { Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm))) }
         item {
             Divider(
-                modifier = Modifier.padding(horizontal = 20.dp),
+                modifier = Modifier.padding(horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.inset_horizontal)),
                 color = DividerColor,
-                thickness = 1.dp
+                thickness = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.thickness_divider)
             )
         }
-        item { Spacer(modifier = Modifier.height(12.dp)) }
+        item { Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_md))) }
         item {
             BalanceDisplay(balance = state.balance)
         }
-        item { Spacer(modifier = Modifier.height(20.dp)) }
+        item { Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_xl))) }
         item {
             ChartCard(
                 balanceHistory = state.balanceHistory,
@@ -158,14 +168,14 @@ private fun HomeContent(
                 onPeriodSelected = { onEvent(HomeEvent.PeriodSelected(it)) }
             )
         }
-        item { Spacer(modifier = Modifier.height(24.dp)) }
+        item { Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_2xl))) }
         item {
             RecipientsSection(
                 recipients = state.recipients,
                 onRecipientClick = { onEvent(HomeEvent.RecipientClicked(it)) }
             )
         }
-        item { Spacer(modifier = Modifier.height(16.dp)) }
+        item { Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_lg))) }
         item {
             TransactionHistorySection(
                 transactions = state.recentTransactions,

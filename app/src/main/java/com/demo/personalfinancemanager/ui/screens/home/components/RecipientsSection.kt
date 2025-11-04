@@ -21,7 +21,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.dimensionResource
 import coil.compose.AsyncImage
 import com.demo.personalfinancemanager.data.model.Recipient
 
@@ -40,16 +41,19 @@ fun RecipientsSection(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp)
+            .padding(vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_lg))
     ) {
         // Section title
         Text(
-            text = "Recipients",
+            text = stringResource(id = com.demo.personalfinancemanager.R.string.recipients_title),
             style = MaterialTheme.typography.titleMedium.copy(
                 fontWeight = FontWeight.SemiBold
             ),
             color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
+            modifier = Modifier.padding(
+                horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.inset_horizontal),
+                vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)
+            )
         )
         
         // Horizontal scrollable list of recipients using Row instead of LazyRow
@@ -57,8 +61,8 @@ fun RecipientsSection(
             modifier = Modifier
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState())
-                .padding(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.inset_horizontal)),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_lg))
         ) {
             recipients.forEach { recipient ->
                 RecipientItem(
@@ -80,19 +84,19 @@ private fun RecipientItem(
 ) {
     Column(
         modifier = Modifier
-            .width(60.dp)
+            .width(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.size_recipient_item_width))
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = LocalIndication.current,
                 onClick = onClick
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp)
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_md) / 2)
     ) {
         // Avatar image
         Box(
             modifier = Modifier
-                .size(56.dp)
+                .size(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.size_avatar))
                 // Draw circular background but don't clip children so badge isn't hidden
                 .background(MaterialTheme.colorScheme.surfaceVariant, CircleShape)
         ) {
@@ -107,9 +111,9 @@ private fun RecipientItem(
 
             // Online/offline status badge (bottom-right dot)
             run {
-                val badgeSize = 12.dp
+                val badgeSize = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.size_badge)
                 val ringColor = MaterialTheme.colorScheme.background
-                val ringStrokeWidth = 2.dp
+                val ringStrokeWidth = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.stroke_ring)
                 val statusColor = if (recipient.isOnline) Color(0xFF4CAF50) else Color(0xFFFF9800) // green or orange
                 Box(
                     modifier = Modifier
@@ -133,9 +137,7 @@ private fun RecipientItem(
         // Recipient name
         Text(
             text = recipient.name,
-            style = MaterialTheme.typography.bodySmall.copy(
-                fontSize = 11.sp
-            ),
+            style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onBackground,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis

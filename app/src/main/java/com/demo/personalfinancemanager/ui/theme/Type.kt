@@ -119,3 +119,7 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
 )
+
+// App-specific extensions to centralize previously hardcoded sizes
+val Typography.displayMediumLarge get() = this.displayMedium.copy(fontSize = 40.sp)
+val Typography.amountLarge get() = this.titleMedium.copy(fontSize = 18.sp, fontWeight = FontWeight.SemiBold)

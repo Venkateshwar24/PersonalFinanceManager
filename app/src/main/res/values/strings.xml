@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">PersonalFinanceManager</string>
+    <!-- Navigation & general labels -->
+    <string name="nav_home">Home</string>
+    <string name="nav_stats">Stats</string>
+    <string name="nav_profile">Profile</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="notifications">Notifications</string>
+
+    <!-- Home / Sections -->
+    <string name="recipients_title">Recipients</string>
+    <string name="transactions_history_title">Transactions history</string>
+    <string name="today">Today</string>
+    <string name="balance_label">Balance</string>
+    <string name="period_1d">1D</string>
+    <string name="period_5d">5D</string>
+    <string name="period_1m">1M</string>
+    <string name="period_3m">3M</string>
+    <string name="period_6m">6M</string>
+    <string name="period_1y">1Y</string>
+
+    <!-- Placeholders / Messages -->
+    <string name="profile_title">Profile</string>
+    <string name="statistics_title">Statistics</string>
+    <string name="coming_soon">Coming Soon</string>
+    <string name="error_oops">Oops! Something went wrong</string>
+    <string name="retry">Retry</string>
+    <string name="welcome">Welcome, </string>
+    <string name="exclamation">!</string>
+
+    <!-- Toasts / Debug -->
+    <string name="open_transaction">Open transaction %1$s</string>
+    <string name="open_recipient">Open recipient %1$s</string>
+
+    <!-- Misc -->
+    <string name="empty"></string>
 </resources>

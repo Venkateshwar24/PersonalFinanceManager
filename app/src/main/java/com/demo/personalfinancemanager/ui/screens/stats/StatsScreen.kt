@@ -7,6 +7,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.dimensionResource
 
 /**
  * Placeholder screen for Statistics/Analytics
@@ -17,7 +19,7 @@ fun StatsScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_lg)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -28,15 +30,15 @@ fun StatsScreen() {
                 text = "📊",
                 style = MaterialTheme.typography.displayLarge
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_lg)))
             Text(
-                text = "Statistics",
+                text = stringResource(id = com.demo.personalfinancemanager.R.string.statistics_title),
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)))
             Text(
-                text = "Coming Soon",
+                text = stringResource(id = com.demo.personalfinancemanager.R.string.coming_soon),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center

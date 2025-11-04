@@ -9,8 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import com.demo.personalfinancemanager.util.FormatUtils
+import com.demo.personalfinancemanager.ui.theme.displayMediumLarge
 
 /**
  * Balance display component
@@ -26,25 +28,22 @@ fun BalanceDisplay(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.inset_horizontal)),
         verticalAlignment = Alignment.Bottom
     ) {
         // Balance amount - large and prominent
         Text(
             text = FormatUtils.formatCurrency(balance),
-            style = MaterialTheme.typography.displayMedium.copy(
-                fontSize = 40.sp,
-                fontWeight = FontWeight.Bold
-            ),
+            style = MaterialTheme.typography.displayMediumLarge.copy(fontWeight = FontWeight.Bold),
             color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.alignByBaseline()
         )
 
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)))
 
         // "Balance" label shown on the same line to the right
         Text(
-            text = "Balance",
+            text = stringResource(id = com.demo.personalfinancemanager.R.string.balance_label),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             maxLines = 1,

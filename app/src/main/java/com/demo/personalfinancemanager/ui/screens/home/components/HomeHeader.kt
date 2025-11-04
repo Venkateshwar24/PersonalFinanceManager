@@ -12,6 +12,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.dimensionResource
 
 /**
  * Header component displaying welcome message and notification bell
@@ -27,7 +29,10 @@ fun HomeHeader(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp, vertical = 16.dp),
+            .padding(
+                horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.inset_horizontal),
+                vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_lg)
+            ),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -40,7 +45,7 @@ fun HomeHeader(
                         fontWeight = FontWeight.Normal
                     )
                 ) {
-                    append("Welcome, ")
+                    append(stringResource(id = com.demo.personalfinancemanager.R.string.welcome))
                 }
                 withStyle(
                     style = SpanStyle(
@@ -56,7 +61,7 @@ fun HomeHeader(
                         fontWeight = FontWeight.Bold
                     )
                 ) {
-                    append("!")
+                    append(stringResource(id = com.demo.personalfinancemanager.R.string.exclamation))
                 }
             },
             style = MaterialTheme.typography.titleLarge
@@ -65,11 +70,11 @@ fun HomeHeader(
         // Notification bell icon button
         IconButton(
             onClick = onNotificationClick,
-            modifier = Modifier.size(40.dp)
+            modifier = Modifier.size(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.corner_pill))
         ) {
             Icon(
                 imageVector = Icons.Outlined.Notifications,
-                contentDescription = "Notifications",
+                contentDescription = stringResource(id = com.demo.personalfinancemanager.R.string.notifications),
                 tint = MaterialTheme.colorScheme.onBackground
             )
         }

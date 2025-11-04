@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_xl">20dp</dimen>
+    <dimen name="spacing_2xl">24dp</dimen>
+    <dimen name="spacing_3xl">28dp</dimen>
+
+    <!-- Sizes -->
+    <dimen name="size_icon_sm">28dp</dimen>
+    <dimen name="size_avatar">56dp</dimen>
+    <dimen name="size_recipient_item_width">60dp</dimen>
+    <dimen name="size_badge">12dp</dimen>
+
+    <!-- Stroke/Thickness -->
+    <dimen name="thickness_divider">1dp</dimen>
+    <dimen name="stroke_ring">2dp</dimen>
+
+    <!-- Corners -->
+    <dimen name="corner_sm">6dp</dimen>
+    <dimen name="corner_md">12dp</dimen>
+    <dimen name="corner_lg">16dp</dimen>
+    <dimen name="corner_xl">20dp</dimen>
+    <dimen name="corner_pill">40dp</dimen>
+
+    <!-- Insets -->
+    <dimen name="inset_horizontal">20dp</dimen>
+    <dimen name="bottom_list_padding">80dp</dimen>
+
+    <!-- Component heights -->
+    <dimen name="height_chart_card">280dp</dimen>
+
+    <!-- Elevations -->
+    <dimen name="elevation_tonal">6dp</dimen>
+    <dimen name="elevation_shadow">8dp</dimen>
+
+    <!-- Legacy XML specific -->
+    <dimen name="marker_padding_horizontal">10dp</dimen>
+    <dimen name="marker_padding_vertical">4dp</dimen>
+    <dimen name="marker_text_size">12sp</dimen>
+</resources>

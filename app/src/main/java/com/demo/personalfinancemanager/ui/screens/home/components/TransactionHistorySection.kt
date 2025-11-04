@@ -16,7 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.dimensionResource
+import com.demo.personalfinancemanager.ui.theme.amountLarge
 import com.demo.personalfinancemanager.data.model.Transaction
 import com.demo.personalfinancemanager.data.model.TransactionType
 import com.demo.personalfinancemanager.util.FormatUtils
@@ -36,18 +38,21 @@ fun TransactionHistorySection(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
+            .padding(vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm))
     ) {
         // Section header with "Today" label (can be made dynamic later)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 8.dp),
+                .padding(
+                    horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.inset_horizontal),
+                    vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)
+                ),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Transactions history",
+                text = stringResource(id = com.demo.personalfinancemanager.R.string.transactions_history_title),
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.SemiBold
                 ),
@@ -55,7 +60,7 @@ fun TransactionHistorySection(
             )
             
             Text(
-                text = "Today",
+                text = stringResource(id = com.demo.personalfinancemanager.R.string.today),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -64,17 +69,17 @@ fun TransactionHistorySection(
         // List of transactions (using Column instead of LazyColumn to avoid nested scrolling issues)
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_md))
         ) {
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)))
             transactions.forEach { transaction ->
                 TransactionItem(
                     transaction = transaction,
                     onClick = { onTransactionClick(transaction.id) },
-                    modifier = Modifier.padding(horizontal = 20.dp)
+                    modifier = Modifier.padding(horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.inset_horizontal))
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)))
         }
     }
 }
@@ -96,20 +101,20 @@ private fun TransactionItem(
                 indication = LocalIndication.current,
                 onClick = onClick
             )
-            .padding(vertical = 8.dp),
+            .padding(vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Left side: Icon + Transaction details
         Row(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_md)),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Icon container
             Box(
                 modifier = Modifier
-                    .size(56.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .size(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.size_avatar))
+                    .clip(RoundedCornerShape(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.corner_md)))
                     .background(MaterialTheme.colorScheme.surfaceVariant),
                 contentAlignment = Alignment.Center
             ) {
@@ -118,14 +123,14 @@ private fun TransactionItem(
                         imageVector = icon,
                         contentDescription = transaction.category.name,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(28.dp)
+                        modifier = Modifier.size(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.size_icon_sm))
                     )
                 }
             }
             
             // Transaction details
             Column(
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_xs))
             ) {
                 Text(
                     text = transaction.title,
@@ -148,10 +153,7 @@ private fun TransactionItem(
                 transaction.amount,
                 transaction.type == TransactionType.CREDIT
             ),
-            style = MaterialTheme.typography.titleMedium.copy(
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp
-            ),
+            style = MaterialTheme.typography.amountLarge,
             // As per design: credits (deposits) are black, debits (payments) are gray
             color = if (transaction.type == TransactionType.CREDIT)
                 MaterialTheme.colorScheme.onBackground

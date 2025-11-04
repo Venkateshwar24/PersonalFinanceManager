@@ -20,6 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -43,7 +45,7 @@ import com.demo.personalfinancemanager.ui.theme.FABBackground
  * This is the root of the app's UI after the theme is applied
  */
 @Composable
-fun MainScreen(viewModelFactory: ViewModelProvider.Factory) {
+fun PersonalFinanceManagerScreen(viewModelFactory: ViewModelProvider.Factory) {
     val navController = rememberNavController()
     val context = LocalContext.current
     
@@ -52,7 +54,11 @@ fun MainScreen(viewModelFactory: ViewModelProvider.Factory) {
             PillBottomBar(
                 navController = navController,
                 onFabClick = {
-                    Toast.makeText(context, "Add Transaction", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(com.demo.personalfinancemanager.R.string.add_transaction),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             )
         }
@@ -76,21 +82,27 @@ private fun PillBottomBar(navController: NavHostController, onFabClick: () -> Un
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(
+                horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_lg),
+                vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)
+            )
             .navigationBarsPadding()
     ) {
         Surface(
             modifier = Modifier
                 .align(Alignment.CenterStart),
-            shape = RoundedCornerShape(40.dp),
+            shape = RoundedCornerShape(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.corner_pill)),
             color = BottomNavBackground,
-            tonalElevation = 6.dp,
-            shadowElevation = 8.dp
+            tonalElevation = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.elevation_tonal),
+            shadowElevation = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.elevation_shadow)
         ) {
             Row(
                 modifier = Modifier
-                    .padding(horizontal = 12.dp, vertical = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(24.dp),
+                    .padding(
+                        horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_md),
+                        vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)
+                    ),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_xl)),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 bottomNavigationItems.forEach { screen ->
@@ -98,10 +110,10 @@ private fun PillBottomBar(navController: NavHostController, onFabClick: () -> Un
                     val tint = if (selected) Color.Black else BottomNavUnselected
                     Row(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(20.dp))
+                            .clip(RoundedCornerShape(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.corner_xl)))
                             .background(
                                 color = if (selected) Color.White else Color.Transparent,
-                                shape = RoundedCornerShape(20.dp)
+                                shape = RoundedCornerShape(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.corner_xl))
                             )
                             .clickable(
                                 interactionSource = remember { MutableInteractionSource() },
@@ -115,18 +127,29 @@ private fun PillBottomBar(navController: NavHostController, onFabClick: () -> Un
                                     restoreState = true
                                 }
                             }
-                            .padding(horizontal = 12.dp, vertical = 8.dp),
+                            .padding(
+                                horizontal = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_md),
+                                vertical = dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_sm)
+                            ),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.spacing_md) / 2)
                     ) {
                         Icon(
                             imageVector = getIconForScreen(screen),
-                            contentDescription = screen.route,
+                            contentDescription = when (screen) {
+                                Screen.Home -> stringResource(id = com.demo.personalfinancemanager.R.string.nav_home)
+                                Screen.Stats -> stringResource(id = com.demo.personalfinancemanager.R.string.nav_stats)
+                                Screen.Profile -> stringResource(id = com.demo.personalfinancemanager.R.string.nav_profile)
+                            },
                             tint = tint
                         )
                         if (selected) {
                             Text(
-                                text = getLabelForScreen(screen),
+                                text = when (screen) {
+                                    Screen.Home -> stringResource(id = com.demo.personalfinancemanager.R.string.nav_home)
+                                    Screen.Stats -> stringResource(id = com.demo.personalfinancemanager.R.string.nav_stats)
+                                    Screen.Profile -> stringResource(id = com.demo.personalfinancemanager.R.string.nav_profile)
+                                },
                                     color = tint,
                                 style = MaterialTheme.typography.labelLarge
                             )
@@ -140,13 +163,13 @@ private fun PillBottomBar(navController: NavHostController, onFabClick: () -> Un
         FloatingActionButton(
             onClick = onFabClick,
             modifier = Modifier.align(Alignment.CenterEnd),
-            shape = RoundedCornerShape(40.dp),
+            shape = RoundedCornerShape(dimensionResource(id = com.demo.personalfinancemanager.R.dimen.corner_pill)),
             containerColor = FABBackground,
             contentColor = MaterialTheme.colorScheme.onPrimary
         ) {
             Icon(
                 imageVector = Icons.Default.Add,
-                contentDescription = "Add Transaction"
+                contentDescription = stringResource(id = com.demo.personalfinancemanager.R.string.add_transaction)
             )
         }
     }
@@ -197,10 +220,8 @@ private fun getIconForScreen(screen: Screen): ImageVector {
 /**
  * Returns the label for each screen to display beside the icon when selected
  */
-private fun getLabelForScreen(screen: Screen): String {
-    return when (screen) {
-        Screen.Home -> "Home"
-        Screen.Stats -> "Stats"
-        Screen.Profile -> "Profile"
-    }
+private fun getLabelForScreen(screen: Screen): String = when (screen) {
+    Screen.Home -> "home"
+    Screen.Stats -> "stats"
+    Screen.Profile -> "profile"
 }
