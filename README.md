@@ -1,4 +1,4 @@
-# Personal Finance Manager (Android)
+# Personal Finance Manager - An Android Application
 
 A modern, production-quality personal finance app built with Kotlin and Jetpack Compose, following MVVM, Repository, and DI best practices.
 
@@ -8,7 +8,7 @@ Personal Finance Manager helps users visualize their balance, review recent tran
 
 ## Demo
 
-- Watch the demo video: (https://github.com/Venkateshwar24/PersonalFinanceManager/blob/main/assets/personalFinanceManagerDemo.mp4?raw=true)
+- Watch the demo video: [(https://github.com/Venkateshwar24/PersonalFinanceManager/blob/main/assets/personalFinanceManagerDemo.mp4?raw=true)](https://github.com/Venkateshwar24/PersonalFinanceManager/blob/main/assets/personalFinanceManagerAppDemo.mp4)
 
 
 ## Technology and Architecture
@@ -67,9 +67,10 @@ app/src/main/java/com/demo/personalfinancemanager/
 │   │   ├── home/           # Home screen + components
 │   │   ├── stats/          # Placeholder
 │   │   └── profile/        # Placeholder
-│   └── MainScreen.kt       # Main container with bottom nav
+│   └── PersonalFinanceManagerScreen.kt       # Main container with bottom nav
 ├── util/                   # Utilities (FormatUtils.kt)
-└── MainActivity.kt         # Entry point
+└── MainActivity.kt        # Entry point
+└── PersonalFinanceManagerApp.kt   # Application Class     
 ```
 
 ## Dependency Injection (Dagger 2 with KSP)
