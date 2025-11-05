@@ -7,8 +7,8 @@ A modern, production-quality personal finance app built with Kotlin and Jetpack 
 Personal Finance Manager helps users visualize their balance, review recent transactions, and send money to frequent recipients—all wrapped in a clean Material 3 UI. The app is structured for scalability and testability with a clear separation of concerns and dependency injection.
 
 ## Demo
-<img src="assets/personalFinanceAppDemo.gif" width="250" height="400">
-- Watch the full demo video: [(https://github.com/Venkateshwar24/PersonalFinanceManager/blob/main/assets/personalFinanceManagerDemo.mp4?raw=true)](https://github.com/Venkateshwar24/PersonalFinanceManager/blob/main/assets/personalFinanceManagerAppDemo.mp4)
+![Demo](assets/personalFinanceManagerAppDemo.gif)
+- Watch the full demo video: https://github.com/Venkateshwar24/PersonalFinanceManager/blob/main/assets/personalFinanceManagerAppDemo.mp4
 
 
 ## Technology and Architecture
